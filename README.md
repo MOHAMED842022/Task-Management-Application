@@ -1,6 +1,6 @@
 "# Task Management Application"
 
-# 📝 To-Do App Pro (MERN Stack)
+# 📝 Task Management Application (MERN Stack)
 
 ## 📖 Description
 
