@@ -4,13 +4,14 @@ const express = require("express");
 const cors = require("cors");
 const connectDB = require("./config/db");
 
+// Routes
 const authRoutes = require("./routes/auth");
 const taskRoutes = require("./routes/tasks");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ✅ Connexion MongoDB
+// ✅ Connexion à MongoDB
 connectDB();
 
 // ✅ Middleware
@@ -21,11 +22,11 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-app.use(express.json());
+app.use(express.json()); // parser JSON
 
-// ✅ Routes
-app.use("/api/auth", authRoutes);
-app.use("/api/tasks", taskRoutes);
+// ✅ Routes API
+app.use("/api/auth", authRoutes); // /api/auth/register et /api/auth/login
+app.use("/api/tasks", taskRoutes); // /api/tasks (GET, POST, DELETE, etc.)
 
 // ✅ Route test
 app.get("/", (req, res) => {
