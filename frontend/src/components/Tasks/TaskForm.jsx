@@ -1,39 +1,21 @@
-import React, { useState } from "react";
-import API from "../../api/api.js";
+// frontend/src/components/Tasks/TaskFormPage.jsx
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import TaskForm from "./TaskForm";
 
-const TaskForm = ({ onTaskAdded }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+const TaskFormPage = () => {
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!title) return alert("Title required");
-    try {
-      await API.post("/tasks", { title, description });
-      setTitle("");
-      setDescription("");
-      onTaskAdded();
-    } catch (err) {
-      alert("Failed to add task");
-    }
+  const handleTaskAdded = () => {
+    navigate("/tasks"); // redirige après ajout
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        placeholder="Task title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
-      />
-      <input
-        placeholder="Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <button type="submit">Add Task</button>
-    </form>
+    <div>
+      <h2>Ajouter une tâche</h2>
+      <TaskForm onTaskAdded={handleTaskAdded} />
+    </div>
   );
 };
 
-export default TaskForm;
+export default TaskFormPage;
