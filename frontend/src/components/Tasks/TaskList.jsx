@@ -1,30 +1,26 @@
+// frontend/src/components/Tasks/TaskList.jsx
 import React, { useEffect, useState } from "react";
-import { getTasks, deleteTask } from "../../api/api.js";
-import TaskForm from "./TaskFormPage.jsx";
+import { getTasks } from "../../api/api";
+import TaskForm from "./TaskForm";
+import TaskItem from "./TaskItem";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
-  const [error, setError] = useState(""); // pour afficher l'erreur
 
+  // Charger les tâches depuis l'API
   const fetchTasks = async () => {
     try {
       const data = await getTasks();
       setTasks(data);
-      setError(""); // réinitialiser l'erreur
     } catch (err) {
       console.error("Erreur chargement tasks:", err);
-      setError("Impossible de charger les tâches. Vérifie que tu es connecté.");
+      alert("Impossible de charger les tâches.");
     }
   };
 
-  const handleDelete = async (id) => {
-    try {
-      await deleteTask(id);
-      setTasks((prev) => prev.filter((t) => t._id !== id));
-    } catch (err) {
-      console.error("Erreur suppression task:", err);
-      alert("Impossible de supprimer la tâche");
-    }
+  // Appelé après ajout ou suppression pour rafraîchir la liste
+  const handleTaskUpdated = () => {
+    fetchTasks();
   };
 
   useEffect(() => {
@@ -36,22 +32,21 @@ const TaskList = () => {
       <h2>Liste des tâches</h2>
 
       {/* Formulaire pour ajouter une tâche */}
-      <TaskForm onTaskAdded={fetchTasks} />
-
-      {/* Affichage d'erreur si la récupération échoue */}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      <TaskForm onTaskAdded={handleTaskUpdated} />
 
       {/* Liste des tâches */}
-      {tasks.length === 0 && !error ? (
+      {tasks.length === 0 ? (
         <p>Aucune tâche disponible</p>
       ) : (
-        tasks.map((task) => (
-          <div key={task._id} style={{ marginBottom: "10px" }}>
-            <h3>{task.title}</h3>
-            <p>{task.description}</p>
-            <button onClick={() => handleDelete(task._id)}>Supprimer</button>
-          </div>
-        ))
+        <ul>
+          {tasks.map((task) => (
+            <TaskItem
+              key={task._id}
+              task={task}
+              onTaskUpdated={handleTaskUpdated}
+            />
+          ))}
+        </ul>
       )}
     </div>
   );

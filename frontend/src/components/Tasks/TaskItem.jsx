@@ -1,14 +1,14 @@
 import React from "react";
-import { deleteTask } from "../../api"; // utilisation cohérente de api.js
+import { deleteTask } from "../../api/api"; // chemin correct vers api.js
 
 const TaskItem = ({ task, onTaskUpdated }) => {
   const handleDelete = async () => {
     if (!window.confirm("Supprimer cette tâche ?")) return;
     try {
       await deleteTask(task._id);
-      onTaskUpdated(); // notifie le parent de mettre à jour la liste
+      onTaskUpdated(); // notifie le parent pour mettre à jour la liste
     } catch (err) {
-      alert(err.response?.data?.message || "Échec de la suppression");
+      alert(err.response?.data?.msg || "Échec de la suppression");
     }
   };
 

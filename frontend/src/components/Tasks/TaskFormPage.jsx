@@ -1,13 +1,14 @@
+// frontend/src/components/Tasks/TaskFormPage.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import TaskForm from "./TaskFormPage"; // le composant de formulaire réel
+import TaskForm from "./TaskForm";
 
 const TaskFormPage = () => {
-  // 🔹 renommé ici pour éviter le conflit
   const navigate = useNavigate();
 
   const handleTaskAdded = () => {
-    navigate("/tasks"); // redirige après ajout
+    // Après ajout, rediriger vers la liste des tâches
+    navigate("/tasks");
   };
 
   return (
