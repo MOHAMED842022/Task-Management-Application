@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import TaskList from "./components/Tasks/TaskList";
-import TaskFormPage from "./components/Tasks/TaskForm";
+import TaskFormPage from "./components/Tasks/TaskFormPage"; // ✅ correct
 
 function App() {
   return (
@@ -12,8 +12,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/tasks" element={<TaskList />} />
-        <Route path="/tasks/add" element={<TaskFormPage />} />{" "}
-        {/* utilise directement TaskForm */}
+        <Route path="/tasks/add" element={<TaskFormPage />} />
       </Routes>
     </Router>
   );

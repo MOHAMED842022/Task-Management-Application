@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getTasks, deleteTask } from "../../api/api.js";
-import TaskForm from "./TaskForm";
+import TaskForm from "./TaskFormPage.jsx";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);

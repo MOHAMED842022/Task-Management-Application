@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import TaskForm from "./TaskForm"; // le composant de formulaire réel
+import TaskForm from "./TaskFormPage"; // le composant de formulaire réel
 
 const TaskFormPage = () => {
   // 🔹 renommé ici pour éviter le conflit
