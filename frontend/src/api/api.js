@@ -5,10 +5,16 @@ const API = axios.create({
   baseURL: "http://localhost:5000/api",
 });
 
-// Ajouter le token JWT si présent
+// Ajouter le token JWT si présent (sauf pour login et register)
 API.interceptors.request.use((req) => {
   const token = localStorage.getItem("token");
-  if (token) req.headers.Authorization = `Bearer ${token}`;
+  if (
+    token &&
+    !req.url.includes("/auth/login") &&
+    !req.url.includes("/auth/register")
+  ) {
+    req.headers.Authorization = `Bearer ${token}`;
+  }
   return req;
 });
 

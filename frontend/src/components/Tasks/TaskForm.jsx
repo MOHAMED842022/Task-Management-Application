@@ -1,9 +1,9 @@
-// frontend/src/components/Tasks/TaskFormPage.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import TaskForm from "./TaskForm";
+import TaskForm from "./TaskForm"; // le composant de formulaire réel
 
 const TaskFormPage = () => {
+  // 🔹 renommé ici pour éviter le conflit
   const navigate = useNavigate();
 
   const handleTaskAdded = () => {
