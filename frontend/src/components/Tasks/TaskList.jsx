@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getTasks, deleteTask } from "../../api";
+import { getTasks, deleteTask } from "../../api/api.js"; // ✅ Utilisation de api.js
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
@@ -16,7 +16,7 @@ const TaskList = () => {
   const handleDelete = async (id) => {
     try {
       await deleteTask(id);
-      fetchTasks();
+      setTasks((prev) => prev.filter((task) => task._id !== id));
     } catch (err) {
       console.error("Erreur suppression task:", err);
     }
@@ -28,12 +28,16 @@ const TaskList = () => {
 
   return (
     <div>
-      {tasks.map((task) => (
-        <div key={task._id}>
-          <h3>{task.title}</h3>
-          <button onClick={() => handleDelete(task._id)}>Supprimer</button>
-        </div>
-      ))}
+      {tasks.length === 0 ? (
+        <p>Aucune tâche disponible</p>
+      ) : (
+        tasks.map((task) => (
+          <div key={task._id}>
+            <h3>{task.title}</h3>
+            <button onClick={() => handleDelete(task._id)}>Supprimer</button>
+          </div>
+        ))
+      )}
     </div>
   );
 };

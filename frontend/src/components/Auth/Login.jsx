@@ -1,22 +1,19 @@
 import React, { useState } from "react";
-// ✅ Import correct de tes fonctions API
-import { login } from "../../api";
+import { login } from "../../api/api.js";
 
-const Login = () => {
+const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await login({ email, password });
-      console.log("Login réussi :", res);
-      localStorage.setItem("token", res.token);
-      setError("");
-      // redirection vers dashboard si nécessaire
+      const data = await login({ email, password });
+      localStorage.setItem("token", data.token);
+      alert("Connecté !");
     } catch (err) {
-      setError(err.response?.data?.message || "Erreur login");
+      console.error(err);
+      alert("Erreur de connexion");
     }
   };
 
@@ -30,13 +27,12 @@ const Login = () => {
       <input
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        type="password"
         placeholder="Mot de passe"
+        type="password"
       />
       <button type="submit">Se connecter</button>
-      {error && <p>{error}</p>}
     </form>
   );
 };
 
-export default Login;
+export default LoginForm;

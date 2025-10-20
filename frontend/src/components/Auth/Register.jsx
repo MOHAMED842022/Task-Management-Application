@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-// ✅ Import correct
-import { register } from "../../api";
+import { useNavigate } from "react-router-dom";
+import { register } from "../../api/api.js";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,7 +14,7 @@ const Register = () => {
       const res = await register({ email, password });
       console.log("Inscription réussie :", res);
       setError("");
-      // redirection vers login si nécessaire
+      navigate("/login");
     } catch (err) {
       setError(err.response?.data?.message || "Erreur inscription");
     }
@@ -33,7 +34,7 @@ const Register = () => {
         placeholder="Mot de passe"
       />
       <button type="submit">S’inscrire</button>
-      {error && <p>{error}</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
     </form>
   );
 };

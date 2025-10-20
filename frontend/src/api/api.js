@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Création d’une instance Axios
 const API = axios.create({
-  baseURL: "http://localhost:5000/api", // ton backend
+  baseURL: "http://localhost:5000/api",
 });
 
 // Ajouter le token JWT si présent
@@ -23,7 +23,7 @@ export const register = async (data) => {
   return res.data;
 };
 
-// --- TASKS (au besoin plus tard) ---
+// --- TASKS ---
 export const getTasks = async () => {
   const res = await API.get("/tasks");
   return res.data;

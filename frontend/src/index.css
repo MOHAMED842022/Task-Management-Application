@@ -1,13 +1,118 @@
-body {
+/* ===== Global styles ===== */
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* ===== Body et centrage global ===== */
+body {
+  background-color: #f4f6f8;
+  color: #333;
+  line-height: 1.6;
+
+  /* Centrage avec flex */
+  display: flex;
+  justify-content: center; /* centre horizontalement */
+  align-items: center; /* centre verticalement */
+  height: 100vh; /* prend toute la hauteur de la fenêtre */
+  margin: 0;
+}
+
+/* ===== Container ===== */
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Container très large */
+.container {
+  width: 95%; /* responsive pour mobile */
+  max-width: 1000px; /* largeur maximale très grande */
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Inputs très larges */
+input {
+  width: 100%; /* prend toute la largeur du container */
+  max-width: 100%;
+  padding: 18px 22px; /* padding confortable */
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+/* Buttons alignés avec inputs */
+button {
+  width: 100%;
+  padding: 14px;
+  background-color: #3498db;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+.error {
+  color: #e74c3c;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.task-list {
+  list-style: none;
+}
+
+.task-list li {
+  background-color: #ecf0f1;
+  margin-bottom: 10px;
+  padding: 12px 15px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-list button {
+  background-color: #e74c3c;
+  font-size: 18px;
+  padding: 6px 10px;
+}
+
+.task-list button:hover {
+  background-color: #c0392b;
+}
+
+.auth-links {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.auth-links a {
+  color: #3498db;
 }

@@ -1,21 +1,23 @@
 import React from "react";
-import API from "../../api";
+import { deleteTask } from "../../api"; // utilisation cohérente de api.js
 
 const TaskItem = ({ task, onTaskUpdated }) => {
-  const deleteTask = async () => {
-    if (!window.confirm("Delete this task?")) return;
+  const handleDelete = async () => {
+    if (!window.confirm("Supprimer cette tâche ?")) return;
     try {
-      await API.delete(`/tasks/${task._id}`);
-      onTaskUpdated();
+      await deleteTask(task._id);
+      onTaskUpdated(); // notifie le parent de mettre à jour la liste
     } catch (err) {
-      alert("Delete failed");
+      alert(err.response?.data?.message || "Échec de la suppression");
     }
   };
 
   return (
     <li>
-      <b>{task.title}</b> - {task.description} {task.completed && "(Completed)"}
-      <button onClick={deleteTask}>❌</button>
+      <b>{task.title}</b> - {task.description} {task.completed && "(Terminé)"}
+      <button onClick={handleDelete} style={{ marginLeft: "10px" }}>
+        ❌
+      </button>
     </li>
   );
 };
