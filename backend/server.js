@@ -1,4 +1,3 @@
-// server.js
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
@@ -22,15 +21,15 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-app.use(express.json()); // parser JSON
+app.use(express.json());
 
 // ✅ Routes API
-app.use("/api/auth", authRoutes); // /api/auth/register et /api/auth/login
-app.use("/api/tasks", taskRoutes); // /api/tasks (GET, POST, DELETE, etc.)
+app.use("/api/auth", authRoutes);
+app.use("/api/tasks", taskRoutes);
 
 // ✅ Route test
 app.get("/", (req, res) => {
-  res.send("ToDo App Pro API");
+  res.send("ToDo App API fonctionne !");
 });
 
 // ✅ Lancement serveur
